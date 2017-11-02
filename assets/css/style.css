@@ -1,0 +1,19 @@
+body {
+	background-image: url("https://cdn-s3.si.com/s3fs-public/sikids/multimedia/photo_gallery/1002/rare.photos.of.kobe.bryant/images/Kobe-rookie.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%,100%;
+	font-family: 'Press Start 2P', cursive;
+	}
+
+
+h1 {
+	font-family: 'Press Start 2P', cursive;
+}
+p {
+	
+	font-family: 'Press Start 2P', cursive;
+	 font-size: 72px;
+  background: -webkit-linear-gradient(#F05, #33A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
