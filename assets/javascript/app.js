@@ -1,80 +1,92 @@
 
+generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
 
-$(document).ready()
-
-
-
-
-var count = 60, timer = setInterval(function() {
-    $("#counter").html(count--);
-    if(count == 1) clearInterval(timer);
-}, 1000);
-console.log(count);
+	function showQuestions(questions, quizContainer){
 
 
-var quizContainer = ("#quiz");
-var resultsContainer = ("#results");
-var secondsLeft = 60*10;
-function timeChecker() {
-	("#quiz-time-left").html()
-}
-function genQuiz (questions, quizContainer, resultsContainer) {
-	function showQuestions(questions, quizContainer) {
-		//need a plae to store output and answers
-		var output = [];
-		var answers;
+	var output = [];
+	var answers;
 
-		for(var i=0; i<myQuestions.length; i++){
-			answers = [];
 
-			for(letter in myQuestions[i].answers){
-				//found snippet online that adds radio buttons
-				answers.push(
-					'<label>'
+	for(var i=0; i<questions.length; i++){
+			
+	
+		answers = [];
+
+		
+		for(letter in questions[i].answers){
+
+			
+			answers.push(
+				'<label>'
 					+ '<input type="radio" name="question'+i+'" value="'+letter+'">'
 					+ letter + ': '
 					+ questions[i].answers[letter]
 				+ '</label>'
 			);
 		}
-		//add to output
-			output.push(
-				'<div class="question">'+ questions[i].question + '</div>'
-				+ '<div class="answers">' + answers.join('') + '<div>'
-				);
-				
-			
-			}
-			quizContainer.innerHTML = output.join('');
-		}
 
-		function showResults(questions, quizContainer, resultsContainer) {
-			var answerContainers = quizContainer.querySelectorALL('.answers');
-			var userAnswer = '';
-			var userCorrect = 0;
+		
+		output.push(
+			'<div class="question">' + questions[i].question + '</div>'
+			+ '<div class="answers">' + answers.join('') + '</div>'
+		);
+	}
 
-			for(var i=0; i<myQuestions.length; i++) {
-				//using query selector to return right answers
-			
-				userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
-
-				if (userAnswer===myQuestions[i].correctAnswer){
-					numCorrect++;
-
-				}
-				
-		}
-
-		resultsContainer.innherHTML = numCorrect+ 'out of' + myQuestions.length;
+	
+	quizContainer.innerHTML = output.join('');
+}
 
 
-		showQuestions(questions,quizContainer);
 
 		
 	}
+
+	function showResults(questions, quizContainer, resultsContainer){
+		var answerContainers = quizContainer.querySelectorAll('.answers');
+	
+	
+	var userAnswer = '';
+	var numCorrect = 0;
+	
+	
+	for(var i=0; i<questions.length; i++){
+
+		
+		userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
+		
+	
+		if(userAnswer===questions[i].correctAnswer){
+			
+			numCorrect++;
+			
+		
+			
+		}
+		
+	}
+
+	
+	resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+
+
+
+		
+	}
+
+	
+	showQuestions(questions, quizContainer);
+
+	submitButton.onclick = function(){
+		showResults(questions, quizContainer, resultsContainer);
+	}
+
+
+
 var myQuestions = [
-{
-	question: "Who recorded an NBA record, 30 assists in one game?",
+	{
+	q1: "Who recorded an NBA record, 30 assists in one game?",
 	answers: {
 		a: "Magic Johnson",
 		b: "Scott Skiles",
@@ -84,7 +96,7 @@ var myQuestions = [
 	correctAnswer: "b"
 },
 {
- 	question: "Who recorded an NBA record, 55 rebounds in one game?",
+ 	q2: "Who recorded an NBA record, 55 rebounds in one game?",
  	answers: {
  		a: "Shaquille Oneal",
  		b: "Bill Russell",
@@ -93,9 +105,10 @@ var myQuestions = [
 
  	},
  	correctAnswer: "c"
-},
+ },	
+
 {
-	question: "Which player has the record for most Championship rings with 11?",
+	q3: "Which player has the record for most Championship rings with 11?",
 	answers: {
 		a: "Michael Jordan",
 		b: "Larry Bird",
@@ -106,7 +119,8 @@ var myQuestions = [
 	correctAnswer: "d"
 },
 {
-	question: "Who has been assessed the most technical fouls?",
+
+	q4: "Who has been assessed the most technical fouls?",
 	answers: {
 		a: "Rasheed Wallace",
 		b: "Bill Laimbeer",
@@ -116,7 +130,7 @@ var myQuestions = [
 	correctAnswer: "c"
 },
 {
-	question: "Who has the most career points in NBA history?",
+	q5: "Who has the most career points in NBA history?",
 	answers: {
 		a: "Kareem Abdul Jabbar",
 		b: "Michael Jordan",
@@ -126,19 +140,20 @@ var myQuestions = [
 	correctAnswer: "a"
 },
 {
-	question: "What is Kobe Bryant's middle name?",
+
+	q6: "What is Kobe Bryant's middle name?",
 	answers: {
 		a: "Beef",
 		b: "Bean",
 		c: "Ball",
 		d: "Brian"
-
 	},
-	correctAnswer: "b"
 
+	correctAnswer: "b"
 },
-{
-	question: "Which one of these names is actually an NBA player?",
+{	
+
+	q7: "Which one of these names is actually an NBA player?",
 	answers: {
 		a: "God Shamgod",
 		b: "Jihad Muhammad",
@@ -148,7 +163,9 @@ var myQuestions = [
 	correctAnswer: "a"
 },
 {
-	question: "Standing at 5'3 this man was the shortest player in NBA history",
+
+
+	q8: "Standing at 5'3 this man was the shortest player in NBA history",
 	answers: {
 		a: "Spud Webb",
 		b: "Earl Boykins",
@@ -158,7 +175,8 @@ var myQuestions = [
 	correctAnswer: "c"
 },
 {
-	question: "Standing at 7'7 this man was the tallest player in NBA history",
+
+	q9: "Standing at 7'7 this man was the tallest player in NBA history",
 	answers: {
 		a: "Mark Eaton",
 		b: "Manute Bol",
@@ -167,8 +185,9 @@ var myQuestions = [
 	},
 	correctAnswer: "b"
 },
+
 {
-	question: "Weighing in at an astounding 375 lbs this man was the heaviest NBA player in history",
+	q10: "Weighing in at an astounding 375 lbs this man was the heaviest NBA player in history",
 	answers: {
 		a: "Oliver Miller",
 		b: "Shaquille Oneal",
@@ -177,19 +196,8 @@ var myQuestions = [
 
 	},
 	correctAnswer: "a"
-}];
+}
 
-
-quizContainer.innherHTML = output.join('');
-
-
-
-
-
-
-var quizContainer = document.getElementById('#quiz');
-var resultsContainer = document.getElementById('#results');
-genQuiz(myQuestions, quizContainer, resultsContainer,)};
-
-
-
+var quizContainer = document.getElementById('quiz');
+var resultsContainer = document.getElementById('results');
+var submitButton = document.getElementById('submit');
