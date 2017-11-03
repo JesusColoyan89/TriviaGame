@@ -54,6 +54,7 @@ function genQuiz (questions, quizContainer, resultsContainer) {
 			var userCorrect = 0;
 
 			for(var i=0; i<myQuestions.length; i++) {
+				//using query selector to return right answers
 			
 				userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
 
@@ -69,8 +70,7 @@ function genQuiz (questions, quizContainer, resultsContainer) {
 
 		showQuestions(questions,quizContainer);
 
-		setTimeout(function() {}, 10);
-			showResults(questions, quizContainer, resultsContainer);
+		
 	}
 var myQuestions = [
 {
