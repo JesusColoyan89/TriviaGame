@@ -17,3 +17,11 @@ p {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+button {
+	float: middle;
+}
+#subwrapper {
+	background-color: pink;
+	opacity: .90;
+}
